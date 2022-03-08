@@ -23,7 +23,7 @@ const Done=(props)=>{
                props.data.map((ele,index)=>{
                     if(ele.completed===true){
                          return (
-                              <>
+                              <div key={index}>
                                <li className="fs-2" key={props.data.id}>{ele.title}</li>
                                <button className="btn btn-primary" onClick={()=>{
                                     addtoTodo(index)
@@ -31,7 +31,7 @@ const Done=(props)=>{
                                <button className="btn btn-danger ms-2" onClick={()=>{
                                     deleteDone(index)
                                }}>Delete</button>
-                              </>
+                              </div>
                              
                          )
                     }

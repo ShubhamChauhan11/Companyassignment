@@ -1,8 +1,8 @@
-import React,{useState} from "react";
+import React,{useCallback, useState} from "react";
 
 const Todo=(props)=>{
      const[input, setInput]= useState("");
-     const[newitem, addnew]= useState({});
+     
 
      function deleteTodo(index){
           let duplicate= [...props.data];
@@ -22,16 +22,31 @@ const Todo=(props)=>{
           props.setData(newdata);
 
      }
-     function addnewtodo(){
-          addnew({
+     function makeinput(e){
+          console.log(e.target.value)
+          setInput(e.target.value);
+          console.log(input);
+     }
+    
+         
+             
+     function addnewtodo(e){
+          
+          e.preventDefault();
+         
+           props.setData([...props.data, {
                id: Math.random(),
                title: input,
                completed: false
 
-          })
-          props.setData([...props.data, newitem])
-          setInput("");
+           }])
+           setInput("");
+           
+          
      }
+             
+          
+    
      
      
      
@@ -43,15 +58,15 @@ const Todo=(props)=>{
                props.data.map((ele, index)=>{
                     if(ele.completed===false){
                          return (
-                              <>
+                              <div key={index}>
                               <li className="fs-2" key={props.data.id}>{ele.title}</li>
                               <button className="btn btn-success" onClick={()=>{
                                    addtodone(index)
                               }}>Done</button>
-                              <button className="btn btn-danger ms-2" onClick={()=>{
+                              <button  className="btn btn-danger ms-2" onClick={()=>{
                                    deleteTodo(index)
                               }}>Delete</button>
-                              </>
+                              </div>
                               
                          )
                     }
@@ -60,10 +75,13 @@ const Todo=(props)=>{
           </ol>
           
           <div className="mt-5 p-3 border border-warning border-4">
-               <input className="input-large" type="text" placeholder="type todo" value={input} onChange={(e)=>{
-                    setInput(e.target.value)
+               <form onSubmit={addnewtodo}>
+               <input  type="text" placeholder="type todo" value={input} onChange={(e)=>{
+                    makeinput(e);
+
                }}/>
-               <button className="btn btn-success mt-3" onClick={addnewtodo}>Add Todo</button>
+               <button type="submit" disabled={!input} className="btn btn-success mt-1.5 ms-3" >Add</button>
+               </form>
           </div>
          
           </div>
