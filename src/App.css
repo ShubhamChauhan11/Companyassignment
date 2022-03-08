@@ -1,0 +1,6 @@
+.contentdiv {
+  display: flex;
+}
+body {
+  background-color: gray;
+}
