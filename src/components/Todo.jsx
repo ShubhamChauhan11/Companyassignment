@@ -3,6 +3,7 @@ import React,{useState} from "react";
 const Todo=(props)=>{
      const[input, setInput]= useState("");
      const[newitem, addnew]= useState({});
+
      function deleteTodo(index){
           let duplicate= [...props.data];
           console.log(duplicate);
@@ -57,8 +58,9 @@ const Todo=(props)=>{
                     
                }): null}
           </ol>
-          <div className="mt-5">
-               <input type="text" placeholder="type here" value={input} onChange={(e)=>{
+          
+          <div className="mt-5 p-3 border border-warning border-4">
+               <input className="input-large" type="text" placeholder="type todo" value={input} onChange={(e)=>{
                     setInput(e.target.value)
                }}/>
                <button className="btn btn-success mt-3" onClick={addnewtodo}>Add Todo</button>
